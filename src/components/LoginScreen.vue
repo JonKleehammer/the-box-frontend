@@ -27,13 +27,13 @@ const router = useRouter()
 const username = ref(null)
 
 const route = useRoute()
-const lobbyID = route.params.lobbyCode
+const lobbyCode = route.params.lobbyCode
 
 const login = async () => {
   try {
     await axios.post('/api/login', {
       username: username.value,
-      lobby: lobbyID
+      lobby: lobbyCode
     })
     .then(response => {
       const { lobby, user, user_id } = response.data
