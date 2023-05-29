@@ -7,7 +7,7 @@ const routes = [
     redirect: { name: 'login' }
   },
   {
-    path: '/login',
+    path: '/login/:lobbyCode?',
     name: 'login',
     component: () => import('./components/LoginScreen.vue'),
   },
