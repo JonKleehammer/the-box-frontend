@@ -6,18 +6,18 @@ export const useSessionStore = defineStore('session', {
   state: () => ({
     username: null,
     userID: null,
-    lobby: null
+    lobbyCode: null
   }),
   actions: {
     setSession(sessionData) {
       this.username = sessionData.user
       this.userID = sessionData.user_id
-      this.lobby = sessionData.lobby
+      this.lobbyCode = sessionData.lobby
     },
     clearSession() {
       this.username = null
       this.userID = null
-      this.lobby = null
+      this.lobbyCode = null
     }
   }
 })
