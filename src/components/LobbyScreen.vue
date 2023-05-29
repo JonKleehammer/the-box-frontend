@@ -4,10 +4,18 @@
 
 <script setup>
 import { onMounted, onUnmounted } from "vue";
-import { connectActionCable, disconnectActionCable } from "@/actionCable";
+import { connectActionCable, disconnectActionCable } from "@/actionCable"
+import { useRoute } from "vue-router"
+import { useSessionStore } from "@/stores/sessionStore";
+
+const route = useRoute()
+const lobbyID = route.params.lobbyCode
+
+const sessionStore = useSessionStore()
+const userID = sessionStore.userID
 
 onMounted(() => {
-  connectActionCable()
+  connectActionCable(lobbyID, userID)
 })
 
 onUnmounted(() => {
