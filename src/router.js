@@ -26,7 +26,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const sessionStore = useSessionStore()
-  if (to.fullPath.split('/').at(0) === 'lobby' && !sessionStore.userID)
+  if (to.fullPath.split('/').at(1) === 'lobby' && !sessionStore.userID)
     next({ name: 'login', params: to.params })
 
   next()
