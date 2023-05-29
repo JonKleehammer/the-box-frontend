@@ -27,7 +27,7 @@ const router = useRouter()
 const username = ref(null)
 
 const route = useRoute()
-const lobbyID = route.query.c
+const lobbyID = route.params.lobbyCode
 
 const login = async () => {
   try {
@@ -61,11 +61,11 @@ const goToLobby = (lobbyCode) => {
   align-items: center;
 }
 
-/deep/ .p-card-title, /deep/ .p-card-subtitle {
+#login-form :deep(.p-card-title), #login-form :deep(.p-card-subtitle) {
   text-align: center;
 }
 
-/deep/ .p-card-footer{
+#login-form :deep(.p-card-footer) {
   display: flex;
   justify-content: right;
 }
