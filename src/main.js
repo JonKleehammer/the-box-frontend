@@ -9,6 +9,8 @@ import axios from 'axios';
 
 import "primevue/resources/themes/bootstrap4-dark-purple/theme.css";
 import "primevue/resources/primevue.min.css";
+import 'primeicons/primeicons.css';
+
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
