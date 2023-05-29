@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useSessionStore } from "@/stores/sessionStore";
 
 const routes = [
   {
@@ -22,5 +23,13 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  const sessionStore = useSessionStore()
+  if (to.fullPath.split('/').at(0) === 'lobby' && !sessionStore.userID)
+    next({ name: 'login', params: to.params })
+
+  next()
+})
 
 export default router;
