@@ -14,6 +14,7 @@
       <div id="question-form">
         <Button icon="pi pi-angle-left"
                 :disabled="difficultyIndex <= 0"
+                v-tooltip.left="'Previous Question'"
                 @click="changeDifficultyLevel(-1)"
         />
         <div id="question-fields">
@@ -31,6 +32,7 @@
         </div>
         <Button icon="pi pi-angle-right"
                 :disabled="difficultyIndex >= difficultyLevels.length - 1"
+                v-tooltip.right="'Next Question'"
                 @click="changeDifficultyLevel(1)"
         />
       </div>

@@ -10,13 +10,15 @@ import axios from 'axios';
 import "primevue/resources/themes/soho-dark/theme.css";
 import "primevue/resources/primevue.min.css";
 import 'primeicons/primeicons.css';
-
+import Tooltip from "primevue/tooltip";
 
 axios.defaults.baseURL = 'http://localhost:3000';
 
 
-createApp(App)
-  .use(PrimeVue)
-  .use(router)
-  .use(pinia)
-  .mount('#app')
+const app = createApp(App)
+app.use(PrimeVue)
+app.use(router)
+app.use(pinia)
+app.mount('#app')
+
+app.directive('tooltip', Tooltip)
