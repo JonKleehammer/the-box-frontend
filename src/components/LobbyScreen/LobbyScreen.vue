@@ -29,7 +29,7 @@ import InviteButton from "@/components/LobbyScreen/InviteButton.vue";
 import Fieldset from "primevue/fieldset";
 import PlayerCard from "@/components/LobbyScreen/PlayerCard.vue";
 import GameCard from "@/components/LobbyScreen/GameCard.vue";
-import gameList from './LobbyScreen/gameList.json'
+import gameList from './gameList.json'
 
 const playerList = ref([])
 
