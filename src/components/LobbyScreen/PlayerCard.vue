@@ -5,8 +5,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
-
 const { playerName } = defineProps(['playerName'])
 </script>
 

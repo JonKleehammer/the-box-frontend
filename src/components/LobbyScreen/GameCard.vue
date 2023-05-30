@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import BlockUI from 'primevue/blockui';
 
 const { gameName, gameDisabled } = defineProps(['gameName', 'gameDisabled'])
