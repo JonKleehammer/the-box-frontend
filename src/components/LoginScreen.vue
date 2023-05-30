@@ -55,10 +55,13 @@ const goToLobby = (lobbyCode) => {
 
 
 #login-form {
-  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#login-form :deep(.p-card-body) {
+  width: 350px;
 }
 
 #login-form :deep(.p-card-title), #login-form :deep(.p-card-subtitle) {
@@ -68,5 +71,14 @@ const goToLobby = (lobbyCode) => {
 #login-form :deep(.p-card-footer) {
   display: flex;
   justify-content: right;
+}
+
+#login-form :deep(.p-card-content) {
+  display: flex;
+  justify-content: center;
+}
+
+#username {
+  flex: 1 0 auto;
 }
 </style>
