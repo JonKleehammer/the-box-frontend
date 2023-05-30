@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Trivia",
+    "disabled": false
+  },
+  {
+    "name": "Guess Who",
+    "disabled": true
+  },
+  {
+    "name": "Wagon to Transylvania",
+    "disabled": true
+  },
+  {
+    "name": "Blank Space",
+    "disabled": true
+  }
+]

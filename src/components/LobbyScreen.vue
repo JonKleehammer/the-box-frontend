@@ -11,7 +11,12 @@
       </div>
     </Fieldset>
     <Fieldset id="game-list" legend="Games">
-
+      <div id="game-list-content">
+        <GameCard v-for="game in gameList"
+                  :game-name="game.name"
+                  :game-disabled="game.disabled"
+        />
+      </div>
     </Fieldset>
   </div>
 </template>
@@ -19,10 +24,12 @@
 <script setup>
 import { ref } from "vue";
 import { useSessionStore } from "@/stores/sessionStore";
-import {createConsumer} from "@rails/actioncable";
+import { createConsumer } from "@rails/actioncable";
 import InviteButton from "@/components/LobbyScreen/InviteButton.vue";
 import Fieldset from "primevue/fieldset";
 import PlayerCard from "@/components/LobbyScreen/PlayerCard.vue";
+import GameCard from "@/components/LobbyScreen/GameCard.vue";
+import gameList from './LobbyScreen/gameList.json'
 
 const playerList = ref([])
 
@@ -72,5 +79,12 @@ const connection = cable.subscriptions.create({ channel: 'LobbyChannel', lobby_c
   display: flex;
   flex-direction: row;
   justify-content: right;
+}
+
+#game-list-content {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 </style>
