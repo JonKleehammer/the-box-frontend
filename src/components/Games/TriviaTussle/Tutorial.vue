@@ -13,7 +13,9 @@
     </template>
     <template #footer>
       <div id="control-buttons">
-        <ReadyToggleButton/>
+        <ReadyToggleButton @playerReady="$emit('playerReady')"
+                           @playerUnready="$emit('playerUnready')"
+        />
       </div>
     </template>
   </Card>
