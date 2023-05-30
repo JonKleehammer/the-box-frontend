@@ -2,7 +2,7 @@
   <PlayerReadyCount :ready-player-count="readyPlayerCount"
                     :total-player-count="totalPlayerCount"
   />
-  <component :is="gameStageComponents[0]"
+  <component :is="gameStageComponents[currentStage]"
              @playerReady="readyStateChange(true)"
              @playerUnready="readyStateChange(false)"
   />
@@ -10,11 +10,16 @@
 
 <script setup>
 import { ref } from 'vue';
-import Tutorial from "@/components/Games/TriviaTussle/Tutorial.vue";
 import PlayerReadyCount from "@/components/Games/BaseComponents/PlayerReadyCount.vue";
+import Tutorial from "@/components/Games/TriviaTussle/Tutorial.vue";
+import ChooseTopic from "@/components/Games/TriviaTussle/ChooseTopic.vue";
+import WriteQuestion from "@/components/Games/TriviaTussle/WriteQuestion.vue";
 
+const currentStage = ref(0)
 const gameStageComponents = [
-    Tutorial
+    Tutorial,
+    ChooseTopic,
+    WriteQuestion
 ]
 
 const readyStateChange = (readyBool) => {
@@ -22,6 +27,10 @@ const readyStateChange = (readyBool) => {
     readyPlayerCount.value++
   else
     readyPlayerCount.value--
+  if (readyPlayerCount >= totalPlayerCount) {
+    currentStage.value++
+    readyPlayerCount.value = 0
+  }
 }
 // player readiness will be tarcked on the backend soon
 const readyPlayerCount = ref(0)
