@@ -16,6 +16,11 @@ const routes = [
     path: '/lobby/:lobbyCode',
     name: 'lobby',
     component: () => import('./components/LobbyScreen/LobbyScreen.vue'),
+  },
+  {
+    path: '/lobby/:lobbyCode/triviaTussle',
+    name: 'triviaTussle',
+    component: () => import('./components/Games/TriviaTussle/TriviaTussleScreen.vue')
   }
 ];
 

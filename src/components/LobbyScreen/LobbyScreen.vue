@@ -15,6 +15,7 @@
         <GameCard v-for="game in gameList"
                   :game-name="game.name"
                   :game-disabled="game.disabled"
+                  @click="loadPlayersIntoGame(game.routeName)"
         />
       </div>
     </Fieldset>
@@ -25,11 +26,14 @@
 import { ref } from "vue";
 import { useSessionStore } from "@/stores/sessionStore";
 import { createConsumer } from "@rails/actioncable";
+import { useRouter } from "vue-router";
 import InviteButton from "@/components/LobbyScreen/InviteButton.vue";
 import Fieldset from "primevue/fieldset";
 import PlayerCard from "@/components/LobbyScreen/PlayerCard.vue";
 import GameCard from "@/components/LobbyScreen/GameCard.vue";
-import gameList from './gameList.json'
+import gameList from './gameList.json';
+
+const router = useRouter()
 
 const playerList = ref([])
 
@@ -49,8 +53,15 @@ const connection = cable.subscriptions.create({ channel: 'LobbyChannel', lobby_c
     console.log(data)
     if (data.action === 'UPDATE_PLAYERS')
       playerList.value = data.payload
+    if (data.action === 'LOAD_GAME')
+      router.push({ name: data.payload.game_name, params: { lobbyCode } })
   }
 })
+
+const loadPlayersIntoGame = (routeName) => {
+  console.log(routeName)
+  connection.perform('load_game', { route_name: routeName })
+}
 </script>
 
 <style scoped>
