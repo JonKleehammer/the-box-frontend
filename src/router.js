@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/lobby/:lobbyCode',
     name: 'lobby',
-    component: () => import('./components/LobbyScreen.vue'),
+    component: () => import('./components/LobbyScreen/LobbyScreen.vue'),
   }
 ];
 
