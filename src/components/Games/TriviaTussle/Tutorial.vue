@@ -1,18 +1,16 @@
 <template>
-  <Card>
+  <Card id="tutorial-card">
     <template #title>
       Welcome to Trivia Tussle!
     </template>
     <template #content>
-      <div id="tutorial-description">
-        In this game you'll all be choosing your own topic
-        and then write 3 questions for that topic!<br><br>
-        After all the questions are written we'll choose questions
-        and answer them like a trivia night!
-      </div>
-    </template>
-    <template #footer>
-      <div id="control-buttons">
+      <div id="tutorial-content">
+        <div id="tutorial-description">
+          In this game you'll all be choosing your own topic
+          then you'll write 3 questions for that topic!<br><br>
+          After all the questions are written we'll choose questions
+          then answer them like a trivia night!
+        </div>
         <ReadyToggleButton @playerReady="$emit('playerReady')"
                            @playerUnready="$emit('playerUnready')"
         />
@@ -27,12 +25,17 @@ import ReadyToggleButton from "@/components/Games/BaseComponents/ReadyToggleButt
 </script>
 
 <style scoped>
-#tutorial-description {
-  width: 400px;
+#tutorial-card {
+  padding: 0 10px;
 }
 
-#control-buttons {
+#tutorial-content {
   display: flex;
-  justify-content: right;
+  flex-direction: column;
+  gap: 25px;
+}
+
+#tutorial-description {
+  width: 400px;
 }
 </style>

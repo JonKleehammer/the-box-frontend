@@ -3,10 +3,10 @@
     <template #title> Welcome to The Box</template>
     <template #subtitle>A multiplayer project in Alpha</template>
     <template #content>
-      <InputText id="username" placeholder="username" v-model="username"/>
-    </template>
-    <template #footer>
-      <Button @click="login">Login</Button>
+      <div class="p-inputgroup flex-1">
+        <InputText id="username" placeholder="username" v-model="username"/>
+        <Button @click="login">Login</Button>
+      </div>
     </template>
   </Card>
 </template>
@@ -66,11 +66,6 @@ const goToLobby = (lobbyCode) => {
 
 #login-form :deep(.p-card-title), #login-form :deep(.p-card-subtitle) {
   text-align: center;
-}
-
-#login-form :deep(.p-card-footer) {
-  display: flex;
-  justify-content: right;
 }
 
 #login-form :deep(.p-card-content) {
