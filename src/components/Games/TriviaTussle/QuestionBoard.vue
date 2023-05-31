@@ -1,6 +1,6 @@
 <template>
   <div id="question-board">
-    <div v-for="topic in questionBoard"
+    <div v-for="topic in gameState.board"
          class="question-column"
     >
       <QuestionBoardCard :text="topic.name"
@@ -9,24 +9,23 @@
       <QuestionBoardCard v-for="(answered, index) in topic.answered"
                          :text="answered ? null : (index + 1) * 100"
                          :answered="answered"
+                         @questionChosen="questionChosen"
       />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { getCurrentInstance } from 'vue'
 import QuestionBoardCard from "@/components/Games/TriviaTussle/QuestionBoardCard.vue";
 
+const instance = getCurrentInstance()
 
+const { gameState } = defineProps(['gameState'])
 
-// dummy data for testing
-const questionBoard = ref([
-  { creator: 'foo', name: 'Chemistry', answered: [false, false, true] },
-  { creator: 'bar', name: 'Biology', answered: [true, true, true] },
-  { creator: 'baz', name: 'History', answered: [true, true, false] },
-  { creator: 'zop', name: 'THE HISTORY OF WESTERN CHINA TEN THOUSAND YEARS AGO', answered: [false, false, false] },
-])
+const questionChosen = (questionData) => {
+  instance.emit('playerInput', questionData)
+}
 </script>
 
 <style scoped>

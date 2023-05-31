@@ -2,6 +2,7 @@
   <BlockUI :blocked="answered">
     <div :class="['question-board-card', {'clickable': !isTitle}]"
          v-tooltip.top="isTitle ? text : null"
+         @click="$emit('questionChosen', { creatorID, questionIndex })"
     >
       {{ text }}
     </div>
@@ -11,7 +12,7 @@
 <script setup>
 import BlockUI from "primevue/blockui";
 
-const { text, answered, isTitle } = defineProps(['text', 'answered', 'isTitle'])
+const { text, answered, isTitle, questionIndex, creatorID } = defineProps(['text', 'answered', 'isTitle', 'questionIndex', 'creatorID'])
 </script>
 
 <style scoped>
