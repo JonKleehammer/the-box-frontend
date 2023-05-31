@@ -14,12 +14,14 @@ import PlayerReadyCount from "@/components/Games/BaseComponents/PlayerReadyCount
 import Tutorial from "@/components/Games/TriviaTussle/Tutorial.vue";
 import ChooseTopic from "@/components/Games/TriviaTussle/ChooseTopic.vue";
 import WriteQuestion from "@/components/Games/TriviaTussle/WriteQuestion.vue";
+import QuestionBoard from "@/components/Games/TriviaTussle/QuestionBoard.vue";
 
 const currentStage = ref(0)
 const gameStageComponents = [
     Tutorial,
     ChooseTopic,
-    WriteQuestion
+    WriteQuestion,
+    QuestionBoard
 ]
 
 const readyStateChange = (readyBool) => {
