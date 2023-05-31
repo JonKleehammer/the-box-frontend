@@ -17,13 +17,19 @@ import Tutorial from "@/components/Games/TriviaTussle/Tutorial.vue";
 import ChooseTopic from "@/components/Games/TriviaTussle/ChooseTopic.vue";
 import WriteQuestion from "@/components/Games/TriviaTussle/WriteQuestion.vue";
 import QuestionBoard from "@/components/Games/TriviaTussle/QuestionBoard.vue";
+import AnswerQuestion from "@/components/Games/TriviaTussle/AnswerQuestion.vue";
 
 const currentStage = ref(0)
 const gameStageComponents = [
     Tutorial,
     ChooseTopic,
     WriteQuestion,
-    QuestionBoard
+    QuestionBoard,
+    AnswerQuestion,
+    QuestionBoard,
+    AnswerQuestion,
+    QuestionBoard,
+    AnswerQuestion
 ]
 
 const readyStateChange = (readyBool) => {
@@ -58,6 +64,8 @@ const loadNextStage = (newGameState) => {
       }
       break;
     case 4:
+    case 6:
+    case 8:
       gameState.value = { topic: 'Chemistry', user_id: 1, question: 'What element has an atomic number of 8?', answer: 'Oxygen' }
       break;
   }
