@@ -9,7 +9,7 @@
           In this game you'll all be choosing your own topic
           then you'll write 3 questions for that topic!<br><br>
           After all the questions are written we'll choose questions
-          then answer them like a trivia night!
+          and answer them like a trivia night!
         </div>
         <ReadyToggleButton @playerReady="$emit('playerReady')"
                            @playerUnready="$emit('playerUnready')"
