@@ -4,7 +4,7 @@
          class="question-column"
     >
       <QuestionBoardCard :text="topic.name"
-                         :has-tooltip="true"
+                         :is-title="true"
       />
       <QuestionBoardCard v-for="(answered, index) in topic.answered"
                          :text="answered ? null : (index + 1) * 100"

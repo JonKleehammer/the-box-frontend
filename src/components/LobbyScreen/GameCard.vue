@@ -1,6 +1,6 @@
 <template>
   <BlockUI :blocked="gameDisabled">
-    <div class="game-card">
+    <div class="game-card clickable">
       {{ gameName }}
     </div>
   </BlockUI>
@@ -23,10 +23,5 @@ const { gameName, gameDisabled } = defineProps(['gameName', 'gameDisabled'])
   align-items: center;
   border-radius: 4px;
   text-align: center;
-}
-
-.game-card:hover {
-  filter: brightness(130%);
-  cursor: pointer;
 }
 </style>
