@@ -3,7 +3,8 @@
     <Fieldset id="player-list" legend="Lobby">
       <div id="player-list-content">
         <PlayerCard v-for="player in playerList"
-                    :player-name="player.username"
+                    :username="player.username"
+                    :is-leader="player.leader"
         />
       </div>
       <div id="player-list-footer">
@@ -23,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, onUnmounted } from "vue";
+import {ref, onUnmounted, computed} from "vue";
 import { useSessionStore } from "@/stores/sessionStore";
 import { createConsumer } from "@rails/actioncable";
 import { useRouter } from "vue-router";
@@ -34,8 +35,6 @@ import GameCard from "@/components/LobbyScreen/GameCard.vue";
 import gameList from './gameList.json';
 
 const router = useRouter()
-
-const playerList = ref([])
 
 // ActionCable Connection
 // A lot of boilerplate, might want to make this easier to re-use
@@ -52,20 +51,22 @@ const connection = cable.subscriptions.create({ channel: 'LobbyChannel', lobby_c
   received(data) {
     console.log(data)
     if (data.action === 'UPDATE_PLAYERS')
-      playerList.value = data.payload
+      sessionStore.setPlayerList(data.payload)
     if (data.action === 'LOAD_GAME')
       router.push({ name: data.payload.game_name, params: { lobbyCode } })
   }
 })
 
-const loadPlayersIntoGame = (routeName) => {
-  console.log(routeName)
-  connection.perform('load_game', { route_name: routeName })
-}
+const playerList = computed(() => sessionStore.playerList )
 
 onUnmounted(() => {
   cable.disconnect()
 })
+
+const loadPlayersIntoGame = (game_name) => {
+  console.log(game_name)
+  connection.perform('load_game', { route_name: game_name })
+}
 </script>
 
 <style scoped>

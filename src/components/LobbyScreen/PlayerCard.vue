@@ -1,11 +1,12 @@
 <template>
  <div class="player-card">
-   {{ playerName }}
+   {{ username }}
+   <i v-if="isLeader" class="pi pi-star-fill"/>
  </div>
 </template>
 
 <script setup>
-const { playerName } = defineProps(['playerName'])
+const { username, isLeader } = defineProps(['username', 'isLeader'])
 </script>
 
 <style scoped>
