@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onUnmounted } from "vue";
 import { useSessionStore } from "@/stores/sessionStore";
 import { createConsumer } from "@rails/actioncable";
 import { useRouter } from "vue-router";
@@ -40,9 +40,9 @@ const playerList = ref([])
 // ActionCable Connection
 // A lot of boilerplate, might want to make this easier to re-use
 const sessionStore = useSessionStore()
-const { userID, username, lobbyCode } = sessionStore
+const { playerID, username, lobbyCode } = sessionStore
 const cable = createConsumer('ws://localhost:3000/cable')
-const connection = cable.subscriptions.create({ channel: 'LobbyChannel', lobby_code: lobbyCode, user_id: userID, username: username }, {
+const connection = cable.subscriptions.create({ channel: 'LobbyChannel', lobby_code: lobbyCode, player_id: playerID, username: username }, {
   connected() {
     console.log('ActionCable connected')
   },
@@ -62,6 +62,10 @@ const loadPlayersIntoGame = (routeName) => {
   console.log(routeName)
   connection.perform('load_game', { route_name: routeName })
 }
+
+onUnmounted(() => {
+  cable.disconnect()
+})
 </script>
 
 <style scoped>

@@ -5,18 +5,18 @@ const pinia = createPinia()
 export const useSessionStore = defineStore('session', {
   state: () => ({
     username: null,
-    userID: null,
+    playerID: null,
     lobbyCode: null
   }),
   actions: {
     setSession(sessionData) {
       this.username = sessionData.user
-      this.userID = sessionData.user_id
+      this.playerID = sessionData.player_id
       this.lobbyCode = sessionData.lobby
     },
     clearSession() {
       this.username = null
-      this.userID = null
+      this.playerID = null
       this.lobbyCode = null
     }
   }

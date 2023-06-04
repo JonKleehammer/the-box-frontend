@@ -27,7 +27,7 @@ const router = useRouter()
 const username = ref(null)
 
 const route = useRoute()
-const lobbyCode = route.params.lobbyCode
+const lobbyCode = route.params.lobbyCode !== '' ? route.params.lobbyCode : null
 
 const login = async () => {
   try {
@@ -36,8 +36,8 @@ const login = async () => {
       lobby: lobbyCode
     })
     .then(response => {
-      const { lobby, user, user_id } = response.data
-      sessionStore.setSession({ lobby, user, user_id })
+      const { lobby, username, player_id } = response.data
+      sessionStore.setSession({ lobby, username, player_id })
       goToLobby(lobby)
     })
   }
@@ -47,6 +47,7 @@ const login = async () => {
 }
 
 const goToLobby = (lobbyCode) => {
+  console.log('go to lobby')
   router.push({ name: 'lobby', params: { lobbyCode } })
 }
 </script>
