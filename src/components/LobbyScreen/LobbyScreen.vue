@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import {ref, onUnmounted, computed} from "vue";
+import { onUnmounted, computed} from "vue";
 import { useSessionStore } from "@/stores/sessionStore";
 import { createConsumer } from "@rails/actioncable";
 import { useRouter } from "vue-router";
@@ -53,7 +53,7 @@ const connection = cable.subscriptions.create({ channel: 'LobbyChannel', lobby_c
     if (data.action === 'UPDATE_PLAYERS')
       sessionStore.setPlayerList(data.payload)
     if (data.action === 'LOAD_GAME')
-      router.push({ name: data.payload.game_name, params: { lobbyCode } })
+      router.push({ name: data.payload.game_name, params: { lobbyCode, gameID: data.payload.game_id } })
   }
 })
 
@@ -65,7 +65,7 @@ onUnmounted(() => {
 
 const loadPlayersIntoGame = (game_name) => {
   console.log(game_name)
-  connection.perform('load_game', { route_name: game_name })
+  connection.perform('load_game', { game_name: game_name })
 }
 </script>
 

@@ -18,7 +18,7 @@ const routes = [
     component: () => import('./components/LobbyScreen/LobbyScreen.vue'),
   },
   {
-    path: '/lobby/:lobbyCode/triviaTussle',
+    path: '/lobby/:lobbyCode/triviaTussle/:gameID',
     name: 'triviaTussle',
     component: () => import('./components/Games/TriviaTussle/TriviaTussleScreen.vue')
   }
