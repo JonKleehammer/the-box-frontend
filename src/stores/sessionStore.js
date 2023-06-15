@@ -7,6 +7,7 @@ export const useSessionStore = defineStore('session', {
     username: null,
     playerID: null,
     lobbyCode: null,
+    gameID: null,
     playerList: [],
   }),
   actions: {
@@ -22,6 +23,8 @@ export const useSessionStore = defineStore('session', {
       this.username = null
       this.playerID = null
       this.lobbyCode = null
+      this.gameID = null
+      this.playerList = []
     }
   }
 })

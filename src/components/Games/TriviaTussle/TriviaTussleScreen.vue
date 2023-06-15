@@ -18,6 +18,27 @@ import ChooseTopic from "@/components/Games/TriviaTussle/ChooseTopic.vue";
 import WriteQuestion from "@/components/Games/TriviaTussle/WriteQuestion.vue";
 import QuestionBoard from "@/components/Games/TriviaTussle/QuestionBoard.vue";
 import AnswerQuestion from "@/components/Games/TriviaTussle/AnswerQuestion.vue";
+import { useSessionStore } from "@/stores/sessionStore";
+import { createConsumer } from "@rails/actioncable";
+import { useRoute } from "vue-router";
+
+const route = useRoute()
+const gameID = route.params.gameID
+
+const sessionStore = useSessionStore()
+const { playerID, lobbyCode } = sessionStore
+const cable = createConsumer('ws://localhost:3000/cable')
+const connection = cable.subscriptions.create({ channel: 'TriviaTussleChannel', lobby_code: lobbyCode, player_id: playerID, game_id:  gameID }, {
+  connected() {
+    console.log('ActionCable connected')
+  },
+  disconnected() {
+    console.log('ActionCable disconnected')
+  },
+  received(data) {
+    console.log(data)
+  }
+})
 
 const currentStage = ref(0)
 const gameStageComponents = [
@@ -33,14 +54,7 @@ const gameStageComponents = [
 ]
 
 const readyStateChange = (readyBool) => {
-  if (readyBool)
-    readyPlayerCount.value++
-  else
-    readyPlayerCount.value--
-  if (readyPlayerCount >= totalPlayerCount) {
-    loadNextStage()
-    readyPlayerCount.value = 0
-  }
+  connection.perform('player_ready', { ready_bool: readyBool })
 }
 // player readiness will be tracked on the backend soon
 const readyPlayerCount = ref(0)
@@ -49,6 +63,7 @@ const totalPlayerCount = ref(1)
 // moving to the next stage will also be controlled by the backend
 const gameState = ref({})
 const loadNextStage = (newGameState) => {
+  return
   currentStage.value++
   // dummy data for testing, this will be filled in with data from the backend in the future
   switch (currentStage.value) {
