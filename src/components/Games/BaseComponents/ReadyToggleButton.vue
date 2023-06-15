@@ -13,7 +13,7 @@
 import { ref, getCurrentInstance } from "vue";
 import ToggleButton from "primevue/togglebutton";
 
-const instance = getCurrentInstance();
+const instance = getCurrentInstance()
 
 const ready = ref(false)
 
