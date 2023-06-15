@@ -48,7 +48,7 @@ const login = async () => {
 
 const goToLobby = (lobbyCode) => {
   console.log('go to lobby')
-  router.push({ name: 'lobby', params: { lobbyCode } })
+  router.push({ name: 'Lobby', params: { lobbyCode } })
 }
 </script>
 

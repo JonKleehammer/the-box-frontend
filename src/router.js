@@ -4,22 +4,22 @@ import { useSessionStore } from "@/stores/sessionStore";
 const routes = [
   {
     path: '/',
-    name: 'home',
-    redirect: { name: 'login' }
+    name: 'Home',
+    redirect: { name: 'Login' }
   },
   {
     path: '/login/:lobbyCode?',
-    name: 'login',
+    name: 'Login',
     component: () => import('./components/LoginScreen.vue'),
   },
   {
     path: '/lobby/:lobbyCode',
-    name: 'lobby',
+    name: 'Lobby',
     component: () => import('./components/LobbyScreen/LobbyScreen.vue'),
   },
   {
     path: '/lobby/:lobbyCode/triviaTussle/:gameID',
-    name: 'triviaTussle',
+    name: 'TriviaTussle',
     component: () => import('./components/Games/TriviaTussle/TriviaTussleScreen.vue')
   }
 ];
@@ -31,8 +31,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const sessionStore = useSessionStore()
-  if (to.fullPath.split('/').at(1) === 'lobby' && !sessionStore.playerID)
-    next({ name: 'login', params: to.params })
+  if (to.fullPath.split('/').at(1) === 'Lobby' && !sessionStore.playerID)
+    next({ name: 'Login', params: to.params })
 
   next()
 })
